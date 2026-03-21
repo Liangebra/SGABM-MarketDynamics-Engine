@@ -7,9 +7,9 @@
 
 ## 1. 概览 / Overview
 
-**SGABM-MarketDynamics-Engine** is a sophisticated simulation platform designed to model the long-term (up to 50 years) co-evolution of policy interventions, power generation strategies, and consumer behaviors in green energy markets. 
+**SGABM-MarketDynamics-Engine** is a sophisticated simulation platform designed to model the long-term  co-evolution of policy interventions, power generation strategies, and consumer behaviors in green energy markets. 
 
-**SGABM-MarketDynamics-Engine** 是一个先进的仿真平台，旨在模拟绿电市场中政策干预、发电策略与消费者行为在长期（最长 50 年）尺度下的协同演化过程。
+**SGABM-MarketDynamics-Engine** 是一个先进的仿真平台，旨在模拟绿电市场中政策干预、发电策略与消费者行为在长期尺度下的协同演化过程。
 
 It transitions from a data-dependent research script to a **Zero-Dependency, Parameter-Driven** engine, allowing researchers to explore market equilibrium directly through parameter tuning.
 
