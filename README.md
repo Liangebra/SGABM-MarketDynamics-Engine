@@ -22,9 +22,11 @@ It transitions from a data-dependent research script to a **Zero-Dependency, Par
 The engine integrates three major mathematical frameworks to simulate market complexity:
 本引擎集成了三大数学框架来模拟市场复杂性：
 
-1.  **Stackelberg Game (Gov vs. Firms)**:
-    - **English**: Simulates the leader-follower interaction where the government sets tax/subsidy policies to maximize social welfare, and firms respond to maximize profits.
-    - **中文 (政府与企业博弈)**：模拟领导者-跟随者交互，政府通过设定税收/补贴政策最大化社会福利，企业据此响应以最大化利润。
+1. **Stackelberg Game (Green Power  vs. Electricity )**:
+
+  - **English**: Simulates the leader-follower interaction where green power firms set initial prices, and electricity consumers respond with purchasing quantities.
+
+  - **中文 (Stackelberg博弈)**：模拟领导者-跟随者交互，绿电企业提出初步报价，用电企业据此响应以采购量。
 
 2.  **EWA Learning (Adaptive Strategy)**:
     - **English**: Implements Experience-Weighted Attraction learning. Agents (Firms/Gov) learn from historical payoffs and adjust their strategy attractions dynamically.
