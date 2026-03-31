@@ -1,10 +1,11 @@
+<div align="center">
 # SGABM-MarketDynamics-Engine
 
 **High-Performance Agent-Based Modeling (ABM) Framework for Green Power Market Evolution**
 **高性能绿电市场演化 ABM 仿真引擎**
 
 ---
-
+</div>
 ## 1. 概览 / Overview
 
 **SGABM-MarketDynamics-Engine** is a sophisticated simulation platform designed to model the long-term  co-evolution of policy interventions, power generation strategies, and consumer behaviors in green energy markets. 
