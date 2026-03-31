@@ -7,6 +7,7 @@
 
 ---
 </div>
+
 ## 1. 概览 / Overview
 
 **SGABM-MarketDynamics-Engine** is a sophisticated simulation platform designed to model the long-term  co-evolution of policy interventions, power generation strategies, and consumer behaviors in green energy markets. 
