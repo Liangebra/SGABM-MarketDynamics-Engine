@@ -10,7 +10,7 @@
 <div align="center">
 
 
-  [中文](README.md) | [English](README.en.md) |[日本語
+  [中文](README.md) | [English](README.en.md) |日本語
 
 
 </div>
