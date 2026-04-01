@@ -2,127 +2,141 @@
   
 # SGABM-MarketDynamics-Engine
 
-**High-Performance Agent-Based Modeling (ABM) Framework for Green Power Market Evolution**
-**高性能绿电市场演化 ABM 仿真引擎**
+**高性能绿电市场演化与政策协同仿真引擎**
 
 ---
 </div>
 
-## 1. 概览 / Overview
+## 1. 概览
 
-**SGABM-MarketDynamics-Engine** is a sophisticated simulation platform designed to model the long-term  co-evolution of policy interventions, power generation strategies, and consumer behaviors in green energy markets. 
+[cite_start]SGABM-MarketDynamics-Engine 是一个先进的多主体仿真（ABM）平台，旨在模拟“双碳”目标下，绿电市场中政策干预（供给侧财税优惠与需求侧绿电交易政策）、发电企业策略与用电企业行为在长期尺度下的协同演化过程 。 
 
-**SGABM-MarketDynamics-Engine** 是一个先进的仿真平台，旨在模拟绿电市场中政策干预、发电策略与消费者行为在长期尺度下的协同演化过程。
-
-It transitions from a data-dependent research script to a **Zero-Dependency, Parameter-Driven** engine, allowing researchers to explore market equilibrium directly through parameter tuning.
-
-该引擎已实现从“数据依赖型脚本”向“**零依赖、参数驱动型**”引擎的转变，研究人员可以直接通过参数调优探索市场均衡。
+[cite_start]该引擎已实现从数据依赖型脚本向**零依赖、参数驱动型**引擎的转变，研究人员可以直接通过参数调优探索政策协同效应、多主体互动与市场均衡 [cite: 279, 280]。
 
 ---
 
-## 2. 核心原理 / Core Principles
+## 2. 核心原理
 
-The engine integrates three major mathematical frameworks to simulate market complexity:
-本引擎集成了三大数学框架来模拟市场复杂性：
+本引擎集成了两大数学框架来模拟市场复杂性与政策演化：
 
-1. **Stackelberg Game (Green Power  vs. Electricity )**:
+1. [cite_start]**三阶段 Stackelberg 序贯博弈** ：
+    - [cite_start]**第一阶段（绿电企业初始决策）**：绿电企业作为领导者，基于利润最大化预期，制定初步的绿电报价与产能投资决策 。
+    - [cite_start]**第二阶段（用电企业响应）**：用电企业作为跟随者，在满足电力需求与政府强制消纳配额（RPS）等约束下，以购电成本最小化为目标确定绿电与传统电力的采购量 。
+    - [cite_start]**第三阶段（绿电最终定价与市场出清）**：绿电企业观测到实际需求后，基于贝叶斯更新机制进行最终价格调整，交易中心汇总供需进行市场出清 。
 
-  - **English**: Simulates the leader-follower interaction where green power firms set initial prices, and electricity consumers respond with purchasing quantities.
-
-  - **中文 (Stackelberg博弈)**：模拟领导者-跟随者交互，绿电企业提出初步报价，用电企业据此响应以采购量。
-
-2.  **EWA Learning (Adaptive Strategy)**:
-    - **English**: Implements Experience-Weighted Attraction learning. Agents (Firms/Gov) learn from historical payoffs and adjust their strategy attractions dynamically.
-    - **中文 (EWA 学习算法)**：实现经验加权吸引力学习逻辑。主体（企业/政府）根据历史收益学习，并动态调整其策略吸引力。
-
-3.  **Evolutionary Game (Consumer Choice)**:
-    - **English**: Models the dynamic shift in clean energy preference among consumers based on price signals, policy incentives, and environmental awareness.
-    - **中文 (演化博弈)**：基于价格信号、政策激励和环保意识，模拟用电企业对清洁能源偏好的动态转移。
+2. **EWA (经验加权吸引力) 学习算法**：
+    - [cite_start]模拟政府的有限理性决策与自适应学习 [cite: 443][cite_start]。政府依据政策实施后的社会福利反馈（涵盖碳减排量、绿电交易量与政策成本），动态更新各项政策工具（如所得税优惠、设备投资抵免、增值税退税、消纳配额、消费补贴）的策略吸引力，实现政策的渐进式调整与演化 [cite: 444, 446]。
 
 ---
 
-## 3. 快速开始 / Quick Start
+## 3. 快速开始
 
-### 3.1 环境准备 / Prerequisites
+### 3.1 环境准备
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3.2 运行仿真 / Run Simulation
-You can run the batch simulation for all default scenarios (S0-S6).
-您可以直接运行覆盖所有默认情景 (S0-S6) 的批量仿真。
+### 3.2 运行仿真
+您可以直接运行覆盖所有默认情景 (S0-S6) 的批量仿真 。
 
 ```bash
-# Default (50 years) / 默认运行（50年）
+# 默认运行（50年）
 python run_simulation.py
 
-# Custom duration (e.g., 20 years) / 自定义时长（如 20 年）
+# 自定义时长（如 20 年）
 python run_simulation.py --years 20
 ```
 
-### 3.3 数据可视化 / Visualization
-Generate "Origami-style" professional charts:
-生成专业“折纸风格”图表：
+### 3.3 数据可视化
+生成他多维分析图表：
+
 ```bash
 python visualize.py
 ```
 
----
+## 4. 项目结构
 
-## 4. 项目结构 / Project Structure
-
-```text
+```Plaintext
 SGABM-MarketDynamics-Engine/
-├── core/                   # 仿真核心逻辑包 / Core Simulation Logic
-│   ├── __init__.py         # 包初始化 / Package Initialization
-│   ├── base.py             # 基础参数与情景定义 / Base Parameters & Scenarios
-│   ├── fun.py              # 核心公式与收益计算 / Mathematical Formulas
-│   └── math_go.py          # 博弈求解与学习算法 / Game Solvers & Learning
-├── utils/                  # 工具函数包 / Utility Modules
-│   ├── __init__.py         # 包初始化 / Package Initialization
-│   ├── input.py            # 数据加载与初始化 / Data Loading & Initialization
-│   └── view.py             # 结果处理与底层绘图 / Data Processing & Plotting
-├── run_simulation.py       # 仿真运行主入口 / Simulation Entry Point
-├── visualize.py            # 可视化增强脚本 / Visualization Script
-├── requirements.txt        # 依赖清单 / Dependencies
-└── README.md               # 项目说明文档 / Documentation
+├── core/                   # 仿真核心逻辑包
+│   ├── __init__.py         # 包初始化
+│   ├── base.py             # 基础参数与情景定义
+│   ├── fun.py              # 核心公式与收益计算
+│   └── math_go.py          # 博弈求解与学习算法
+├── utils/                  # 工具函数包
+│   ├── __init__.py         # 包初始化
+│   ├── input.py            # 数据加载与初始化
+│   └── view.py             # 结果处理与底层绘图
+├── run_simulation.py       # 仿真运行主入口
+├── visualize.py            # 可视化增强脚本
+├── requirements.txt        # 依赖清单
+└── README.md               # 项目说明文档
 ```
 
----
+## 5. 参数修改指南  
+### 核心说明  
+- 项目特性：已实现**“零依赖”**，所有初始状态均定义在 `core/base.py` 中。  
+- 修改位置：唯一需调整的配置文件为 `core/base.py`。  
 
-## 5. 参数修改指南 / Parameter Modification
+### 参数组详情  
+按功能分类的参数组及关键说明如下：  
 
-The project is **Zero-Dependency**; all initial states are defined in `core/base.py`.
-本项目已实现“零依赖”，所有初始状态均在 `core/base.py` 中定义。
+1. **政府偏好参数组**  
+   - 关键常量：**GOV_ALPHA**、**GOV_BETA**、**GOV_GAMMA**  
+   - 说明：社会福利函数中**环境、经济与政策成本**的决策权重（拟合值为 **4.44, 18.98, 5.2**）。  
 
-### 修改位置 / Location: `core/base.py`
+2. **企业配置参数组**  
+   - 关键常量：**GREEN_ENERGY_GROUPS**  
+   - 说明：基于聚类分析划分的**低规模组（中小型企业）**与**中规模组（头部企业）**的初始资产、成本及产能设定。  
 
-| Parameter Group / 参数组 | Key Constants / 关键常量 | Description / 说明 |
-| :--- | :--- | :--- |
-| **Market Scale / 市场规模** | `MARKET_SCALING_FACTOR` | Controls the demand-supply base volume. (控制供需基础规模。) |
-| **Gov Preference / 政府偏好** | `GOV_ALPHA`, `GOV_BETA` | Weights for Environment vs Economy. (环境与经济的决策权重。) |
-| **Firm Config / 企业配置** | `GREEN_ENERGY_GROUPS` | Initial assets, costs, and counts of generation firms. (发电企业的资产、成本及数量。) |
-| **Consumer Config / 用户配置** | `CONSUMER_GROUPS` | Industry-specific energy consumption and green preferences. (分行业的用电量与绿电偏好。) |
-| **Scenarios / 实验情景** | `SCENARIO_TARGETS` | Policy tool values for S1-S6 (Tax, Subsidy, Quota). (各情景下的政策工具值。) |
+3. **用户配置参数组**  
+   - 关键常量：**CONSUMER_GROUPS**  
+   - 说明：基于自然垄断属性设定的**区域用电企业**，结合**GDP弹性系数**与**ARIMA模型**外生设定电力需求。  
 
----
+4. **实验情景参数组**  
+   - 关键常量：**SCENARIO_TARGETS**  
+   - 说明：覆盖**S0-S6七大情景**（基准情景、强供给侧激励、强需求侧拉动、对称协同、区域差异化协同等）。  
 
-## 5. 输出解析 / Output Interpretation
+5. **学习算法参数组**  
+   - 关键常量：**EWA_PARAMETERS**  
+   - 说明：政府自适应学习的核心参数（含**折旧率、想象力参数**等）。  
 
-Simulation results are stored in the `batch_results/[TIMESTAMP]/` directory:
-仿真结果存储在 `batch_results/[时间戳]/` 目录下：
 
-*   **`comprehensive_results.xlsx`**: Detailed time-series data for all scenarios. (所有情景的详细时间序列数据。)
-*   **`summary_report.txt`**: Ranking and recommendation of policy scenarios. (政策情景的排名与推荐建议。)
-*   **`visualizations/`**: Includes Line, Radar, and Origami charts. (包含折线图、雷达图和专项分析图。)
+## 6. 输出解析  
+仿真结果统一存储在 `batch_results/[时间戳]/` 目录下，核心输出分三类：  
 
----
+### 1. 综合结果表（**comprehensive_results.xlsx**）  
+涵盖**碳减排量、绿电渗透率、绿电累计交易量、出清价格、产能利用率、累计政策成本**等多维评估指标的详细时间序列数据。  
 
-## 6. 应用范围 / Use Cases
+### 2. 总结报告（**summary_report.txt**）  
+- 各政策情景的**综合绩效评估**与**排名**；  
+- **最优政策协同路径**的推荐建议。  
 
-*   **Policy Sensitivity Test**: Analyze how carbon quotas affect market clearing prices. (政策灵敏度测试：分析碳配额如何影响市场出清电价。)
-*   **Strategic Planning**: Simulate long-term ROI for green energy investment groups. (战略规划：模拟绿电投资集团的长期投资回报率。)
-*   **Decarbonization Pathways**: Evaluate the time required to reach net-zero under different subsidies. (脱碳路径：评估不同补贴强度下达到净零排放所需的时间。)
+### 3. 可视化文件夹（**visualizations/**）  
+包含四类关键图表：  
+- 关键指标**长期演化趋势折线图**；  
+- 多政策情景**绩效对比雷达图**；  
+- 主体交互**网络弦图**；  
+- 政策工具**动态调用热力图**。  
 
----
-© 2026 SGABM Development Team. Lead Developer: Liang.
+
+## 7. 应用范围  
+项目聚焦四大核心场景，支撑绿电市场政策设计与演化分析：  
+
+### 1. 政策协同效应评估  
+分析**对称协同、偏供给/需求侧协同**等组合对**市场均衡、经济运行与环境减排“双重红利”**的影响。  
+
+### 2. 市场主体策略推演  
+模拟**异质性绿电企业**与**用电企业**在政策压力、配额约束及成本波动下的**长短期动态博弈反应**。  
+
+### 3. 长期演化路径探究  
+追踪**绿电出清价格收敛、渗透率震荡、系统政策成本**的长期轨迹，揭示市场**路径依赖与复杂演化特征**。  
+
+### 4. 区域差异化设计  
+模拟“西电东送”格局下，**资源富集区+负荷集中区**的**“一区一策”**实施效果测试。  
+
+
+## 版权信息  
+© 2026 SGABM Development Team. Lead Developer: **Liang**.  
+
+
